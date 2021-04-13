@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import CountryList from './Countries';
+import { Link } from 'react-router-dom';
 
 let answered = false;
 function Game() {
     const [flags, setFlags] = useState([]);
     const [correctAnswer, setAnswer] = useState("");
-    const [score, setCount] = useState(0);
+    const [score, setScore] = useState(0);
+    const [numAnswered, setNumAnswered] = useState(0);
 
     useEffect(() => {
         getFlags();
@@ -15,13 +17,34 @@ function Game() {
     {
         answered = false;
         let flagsList = [];
-        let answerIndex = Math.floor(Math.random() * 4)
+        let answerIndex = Math.floor(Math.random() * 4);
+        let flagIndex;
+        let curCountry;
+        let name;
         for (let i = 0; i < 4; i++)
         {
-            let flagIndex = Math.floor(Math.random() * CountryList.length);
-            let curCountry = CountryList[flagIndex];
+            let checkedDuplicate = false;
+
+            while (checkedDuplicate === false)
+            {
+                flagIndex = Math.floor(Math.random() * CountryList.length);
+                curCountry = CountryList[flagIndex];
+                name = curCountry.name;
+
+                if (flagsList.length === 0)
+                    checkedDuplicate = true;
+                else
+                {
+                    for (let j = 0; j < flagsList.length; j++)
+                    {
+                        if (name === flagsList[j].name)
+                            break;
+                        if (j === flagsList.length -1)
+                            checkedDuplicate = true;
+                    }
+                }
+            }
             let image = "https://www.countryflags.io/"+curCountry.code+"/flat/64.png";
-            let name = curCountry.name;
             let answer = false;
             if (i === answerIndex)
             {
@@ -40,8 +63,8 @@ function Game() {
     {
         if (answered === false)
         {
+            setNumAnswered(numAnswered+1);
             answered = true;
-            console.log(name);
             document.getElementById(correctAnswer).style.background = '#00FF00';
 
             if(name !== correctAnswer)
@@ -50,7 +73,7 @@ function Game() {
                 button.style.background = '#FF0000'
             }
             else
-                setCount(score+1);
+                setScore(score+1);
         }
     }
     function newFlags()
@@ -74,7 +97,18 @@ function Game() {
                 </div>
             </div>
             <div className='next_button'>
-            <button type="button" id="next" onClick={newFlags}>Continue</button>
+                <button type="button" id="next" onClick={newFlags}>Continue</button>
+            </div>
+            <div className='exit_button'>
+                <Link to={{
+                    pathname: "/results",
+                    state: {
+                        score: score,
+                        numAnswered: numAnswered
+                    }
+                }}>
+                    <button type="button" id="exit">Exit</button>
+                </Link>
             </div>
             <div className='score_area'>
                 <p>Score: {score}</p>
