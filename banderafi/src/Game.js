@@ -90,17 +90,17 @@ function Game() {
                 <div className='flags'>
                     {
                         flags.map((flag) => 
-                            <button key={flag.name} id={flag.name}>
-                                <img src={flag.image} alt="flag" onClick={() => checkAnswer(flag.name)}/>
+                            <button key={flag.name} id={flag.name} onClick={() => checkAnswer(flag.name)}>
+                                <img src={flag.image} alt="flag"/>
                             </button>)
                     }
                 </div>
             </div>
-            <div class="divider"/>
+            <div className="divider"/>
             <div className='next_button'>
                 <button type="button" id="next" onClick={newFlags}>Continue</button>
             </div>
-            <div class="divider"/>
+            <div className="divider"/>
             <div className='exit_button'>
                 <Link to={{
                     pathname: "/results",
