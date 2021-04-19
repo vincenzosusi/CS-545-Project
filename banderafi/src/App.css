@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
 .App {
   text-align: center;
 }
@@ -35,4 +37,36 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-color: #282c34;
+  color: white;
+  padding: 40px;
+  font-family: 'Anonymous Pro', monospace;  
+  text-align: center;
+}
+
+button{
+  font-family : inherit;
+  font-size: 20px;
+}
+
+.flags img {
+  width: 125px;
+}
+
+.flags button {
+  width:250px;
+  margin:5px;
+}
+
+.question_area p{
+  font-size: 25px;
+}
+
+.divider{
+  width:5px;
+  height:auto;
+  display:inline-block;
 }
