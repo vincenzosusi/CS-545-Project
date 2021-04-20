@@ -2,13 +2,24 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import CountryList from './Countries';
 import { Link } from 'react-router-dom';
+import {useLocation} from "react-router-dom";
 
 let answered = false;
 function Game() {
+    let data = useLocation();
+    let studyFlags = [];
+    const mode = data.state.mode;
+    if (mode === 'study'){
+        studyFlags = data.state.toStudy;
+    }
     const [flags, setFlags] = useState([]);
     const [correctAnswer, setAnswer] = useState("");
     const [score, setScore] = useState(0);
     const [numAnswered, setNumAnswered] = useState(0);
+    const [lives, setLives] = useState(3);
+    const [toStudy, setStudy] = useState(studyFlags);
+    const [studyIndex, setStudyIndex] = useState(0);
+    const [remainingStudy, setRemaining] = useState(toStudy.length);
 
     useEffect(() => {
         getFlags();
@@ -27,7 +38,12 @@ function Game() {
 
             while (checkedDuplicate === false)
             {
-                flagIndex = Math.floor(Math.random() * CountryList.length);
+                if (mode === 'study' && i === answerIndex){
+                    flagIndex = toStudy.shift();
+                    setStudy(toStudy);
+                } else {
+                    flagIndex = Math.floor(Math.random() * CountryList.length);
+                }
                 curCountry = CountryList[flagIndex];
                 name = curCountry.name;
 
@@ -48,6 +64,8 @@ function Game() {
             let answer = false;
             if (i === answerIndex)
             {
+                setStudyIndex(flagIndex);
+
                 answer = true;
                 setAnswer(curCountry.name);
             }
@@ -69,17 +87,34 @@ function Game() {
 
             if(name !== correctAnswer)
             {
+                setLives(lives - 1);
+                setStudy(toStudy.concat(studyIndex));
                 let button = document.getElementById(name);
                 button.style.background = '#FF0000'
             }
-            else
+            else {
                 setScore(score+1);
+                setRemaining(remainingStudy - 1);
+            }
         }
     }
     function newFlags()
     {
         if (answered === true)
             getFlags();
+        document.getElementById(correctAnswer).style.background = '#FFFFFF';
+    }
+    function Next(props) 
+    {
+        if (props.gamemode === 'survival' && lives <= 0) {
+            return <p class="game_over">Game Over</p>;
+        } else if (props.gamemode === 'study' && remainingStudy === 0) {
+            return <p class="game_over">Finished Studying</p>;
+        } else {
+            return <div className='next_button'>
+                        <button type="button" id="next" onClick={newFlags}>Continue</button>
+                    </div>
+        }
     }
     return (
         <div className='game_area'>
@@ -97,16 +132,16 @@ function Game() {
                 </div>
             </div>
             <div class="divider"/>
-            <div className='next_button'>
-                <button type="button" id="next" onClick={newFlags}>Continue</button>
-            </div>
+            <Next gamemode={mode} />
             <div class="divider"/>
             <div className='exit_button'>
                 <Link to={{
                     pathname: "/results",
                     state: {
                         score: score,
-                        numAnswered: numAnswered
+                        numAnswered: numAnswered,
+                        mode: mode,
+                        toStudy: toStudy
                     }
                 }}>
                     <button type="button" id="exit">Exit</button>
@@ -114,6 +149,8 @@ function Game() {
             </div>
             <div className='score_area'>
                 <p>Score: {score}</p>
+                {mode === 'survival' && <p>Lives: {lives}</p>}
+                {mode === 'study' && <p>Flags Remaining: {remainingStudy}</p>}
             </div>
         </div>
     )

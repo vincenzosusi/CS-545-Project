@@ -6,7 +6,13 @@ function Results() {
     let data = useLocation();
     let score = data.state.score;
     let numAnswered = data.state.numAnswered;
+    let mode = data.state.mode;
+    let toStudy = data.state.toStudy;
     let percent = 0;
+
+    if (mode === 'study') {
+        mode = 'freeplay';
+    }
 
     if (numAnswered!==0)
     {
@@ -19,9 +25,27 @@ function Results() {
             <p> You answered {score} out of {numAnswered} correctly</p>
             <p> {score} / {numAnswered} = {percent}%</p>
             <Link to={{
-                pathname: "/play"
+                pathname: "/play",
+                state: {
+                    mode: mode
+                }
             }}>
                 <button type="button" id="retry">Play Again</button>
+            </Link>
+            {toStudy.length !== 0 && 
+            <Link to={{
+                pathname: "/play",
+                state: {
+                    mode: 'study',
+                    toStudy: toStudy
+                }
+            }}>
+                <button type="button" id="study">Study</button>
+            </Link> }
+            <Link to={{
+                pathname: "/selection",
+            }}>
+                <button type="button" id="new_mode">Select new mode</button>
             </Link>
         </div>
     )
