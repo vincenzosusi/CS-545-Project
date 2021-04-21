@@ -56,7 +56,7 @@ function Login() {
                 <label for="password">Password</label>
                 <input id="password" type="password"/>
                 
-                {error && <h4 className="error">{loginError}</h4>}
+                {error && <h4 className="error">{error}</h4>}
                 <div>
                     <button type="submit">Login</button>
                 </div>
