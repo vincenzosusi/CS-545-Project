@@ -46,7 +46,8 @@ function Game() {
                     }
                 }
             }
-            let image = "https://www.countryflags.io/"+curCountry.code+"/flat/64.png";
+            let code = (curCountry.code).toLowerCase();
+            let image = "https://flagcdn.com/256x192/"+code+".png";
             let answer = false;
             if (i === answerIndex)
             {
@@ -93,7 +94,7 @@ function Game() {
                     {
                         flags.map((flag) => 
                             <button key={flag.name} id={flag.name} onClick={() => checkAnswer(flag.name)}>
-                                <img src={flag.image} alt="flag"/>
+                                <img src={flag.image} alt={flag.code}/>
                             </button>)
                     }
                 </div>
