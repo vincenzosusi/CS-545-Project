@@ -1,8 +1,14 @@
 [
     {
         "username": "corinne",
-        "firstName": "Corinn",
+        "firstName": "Corinne",
         "lastName": "Wisniewski",
         "password": "hey"
+    },
+    {
+        "username": "hi",
+        "firstName": "hi",
+        "lastName": "hi",
+        "password": "hi"
     }
 ]
