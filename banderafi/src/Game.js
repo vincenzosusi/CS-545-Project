@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import CountryList from './Countries';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './Auth';
 
 let answered = false;
 function Game() {
@@ -9,6 +10,7 @@ function Game() {
     const [correctAnswer, setAnswer] = useState("");
     const [score, setScore] = useState(0);
     const [numAnswered, setNumAnswered] = useState(0);
+    const [user, setUser] = useState(AuthContext);
 
     useEffect(() => {
         getFlags();

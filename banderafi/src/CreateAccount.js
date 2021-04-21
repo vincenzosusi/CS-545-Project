@@ -43,6 +43,7 @@ function CreateAccount() {
         }        
         setError('');
         setUser(userSignin);
+        localStorage.setItem('currentUser', userSignin);
     }
 
     const handleSubmit = (e) => {
