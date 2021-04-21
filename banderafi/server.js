@@ -35,7 +35,6 @@ app.post('/create-account', async (req, res) => {
             "lastName": newUser.lastName,
             "password": newUser.password});
 
-        console.log(users);
         const toWrite = JSON.stringify(users, null, 4);
         
         await fs.writeFile('./data/users.json', toWrite);
@@ -43,5 +42,31 @@ app.post('/create-account', async (req, res) => {
         res.status(200).json(newUser);
     } catch (e) {
         res.status(400).send('Username Already Exists');
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const users = JSON.parse(await fs.readFile('./data/users.json'));
+        const loginAttempt = {
+            username: req.body.username,
+            password: req.body.password
+        };
+
+        for (let existingUser of users) {
+            if (existingUser.username === loginAttempt.username) {
+                if (existingUser.password === loginAttempt.password) {
+                    res.status(200).json(existingUser);
+                    return;
+                }
+                if (existingUser.password !== loginAttempt.password) {
+                    throw 'Username Or Password Incorrect';
+                }
+            }
+        }
+
+        throw 'Username Or Password Incorrect';
+    } catch (e) {
+        res.status(400).send('Username Or Password Incorrect');
     }
 });

@@ -2,15 +2,44 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import './App.css';
 import { AuthContext } from './Auth';
+import axios from 'axios';
 
 function Login() {
-    const {user} = useContext(AuthContext);
-    const [ loginError, setLoginError ] = useState('');    
-    const loginUser = (e) => {
+    const [user, setUser] = useContext(AuthContext);
+    const [ error, setError ] = useState('');    
+    
+    async function loginUser() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (!username || !password) {
+            setError('Must fill in all fields');
+            return false;
+        }
+
+        const loginAttempt = {
+            username: username,
+            password: password
+        };
+
+        let userSignin = {}
+
+        try {
+            userSignin = await axios.post('http://localhost:5000/login', loginAttempt);
+        } catch (e) {
+            //console.log(e);
+            //console.log(userSignin);
+            setError('Username Or Password Incorrect');
+            return false;
+        }
+
+        setError('');
+        setUser(userSignin);
+    }
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        
-        // attemp to login
-        // check if user exists and confirm login info
+        loginUser();
     }
 
     if (user) {
@@ -20,7 +49,7 @@ function Login() {
     return (
         <div className="login-page">
             <h1>Login</h1>
-            <form onSubmit={loginUser}>
+            <form onSubmit={handleSubmit}>
                 <label>
                     <p>Username</p>
                     <input id="username" type="text" placeholder="Username"/>
@@ -29,7 +58,7 @@ function Login() {
                     <p>Password</p>
                     <input id="password" type="password" placeholder="Password"/>
                 </label>
-                {loginError && <h4 className="error">{loginError}</h4>}
+                {error && <h4 className="error">{error}</h4>}
                 <div>
                     <button type="submit">Login</button>
                 </div>

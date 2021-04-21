@@ -6,16 +6,19 @@ import Login from './pages/Login';
 import Game from './pages/Game';
 import Results from './pages/Results';
 import CreateAccount from './pages/CreateAccount';
-import {AuthProvider} from './Auth';
+import SignOutButton from './SignOut';
+import {AuthContext} from './Auth';
 
 function App() {
-  const [loginStatus, setLoginStatus] = useState(null);
+  const [user, setUser] = useState(null);
 
   return (
-    <AuthProvider>   
+    <AuthContext.Provider value={[user, setUser]}> 
+      {user ? <h1>{user.data.username}</h1> : ''} 
       <Router>
         <Link exact to="/create-account">Create Account</Link>
         <Link exact to="/login">Login</Link>
+        <SignOutButton />
 
         <Switch>
           <Route path='/login' exact component={Login} />
@@ -24,7 +27,7 @@ function App() {
           <Route path='/results' exact component={Results} />
         </Switch>
       </Router>
-    </AuthProvider>
+    </AuthContext.Provider>
   );
 }
 

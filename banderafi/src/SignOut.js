@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from './Auth';
 
 const SignOutButton = () => {
-    const signOut = () => {
-        AuthContext = setContext()
-    }
+    const [user, setUser] = useContext(AuthContext);
+
+    // const signOut = () => {
+    //     AuthContext = setContext()
+    // }
 
     return (
-        <button type='button' onClick={signOut}>
+        <button type='button' onClick={() => setUser(null)}>
             Sign Out
         </button>
     );

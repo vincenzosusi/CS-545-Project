@@ -5,7 +5,7 @@ import { AuthContext } from './Auth';
 import axios from 'axios';
 
 function CreateAccount() {
-    const {user} = useContext(AuthContext);
+    const [user, setUser] = useContext(AuthContext);
     const [error, setError] = useState('');
     
     async function createNewUser () {
@@ -32,17 +32,17 @@ function CreateAccount() {
             password: password
         };
 
-        let user = {}
+        let userSignin = {}
 
         try {
-            user = await axios.post('http://localhost:5000/create-account', newUser);
+            userSignin = await axios.post('http://localhost:5000/create-account', newUser);
         } catch (e) {
             //console.log(e);
             setError('Username Already Exists');
             return false;
-        }
-        
+        }        
         setError('');
+        setUser(userSignin);
     }
 
     const handleSubmit = (e) => {
