@@ -58,27 +58,21 @@ function CreateAccount() {
         <div className="create-account-page">
             <h1>Create Account</h1>
             <form onSubmit={createNewUser}>
-                <label>
-                    <p>First Name</p>
-                    <input id="firstName" type="text" placeholder="First Name"/>
-                </label>
-                <label>
-                    <p>Last Name</p>
-                    <input id="lastName" type="text" placeholder="Last Name"/>
-                </label>
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text"/>
                 
-                <label>
-                    <p>Username</p>
-                    <input id="username" type="text" placeholder="Username"/>
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input id="password" type="password" placeholder="Password"/>
-                </label>
-                <label>
-                    <p>Re-Enter Password</p>
-                    <input id="confirmPassword" type="password" placeholder="Re-Enter Password"/>
-                </label>
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" />
+                
+                
+                <label for="username">Username</label>
+                <input class="username" name="username" type="text"/>
+                
+                <label for="password">Password</label>
+                <input class="password" name="password" type="password" />
+                
+                <label for="confirmPassword">Re-Enter Password</label>
+                <input id="confirmPassword" name="confirmPassword" type="password"/>
                 
                 <div>
                     <button type="submit">Login</button>

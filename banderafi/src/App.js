@@ -6,18 +6,19 @@ import Login from './pages/Login';
 import Game from './pages/Game';
 import Results from './pages/Results';
 import CreateAccount from './pages/CreateAccount';
+import Welcome from './pages/Welcome';
+import Nav from './Nav';
 import {AuthProvider} from './Auth';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(null);
 
   return (
-    <AuthProvider>   
+    <AuthProvider>  
+      <Nav></Nav>
       <Router>
-        <Link exact to="/create-account">Create Account</Link>
-        <Link exact to="/login">Login</Link>
-
         <Switch>
+          <Route path='/' exact component={Welcome} />
           <Route path='/login' exact component={Login} />
           <Route path='/create-account' exact component={CreateAccount} />
           <Route path='/play' exact component={Game} />

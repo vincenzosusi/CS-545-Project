@@ -21,14 +21,12 @@ function Login() {
         <div className="login-page">
             <h1>Login</h1>
             <form onSubmit={loginUser}>
-                <label>
-                    <p>Username</p>
-                    <input id="username" type="text" placeholder="Username"/>
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input id="password" type="password" placeholder="Password"/>
-                </label>
+                <label for="username">Username</label>
+                <input id="username" type="text" />
+                
+                <label for="password">Password</label>
+                <input id="password" type="password"/>
+                
                 {loginError && <h4 className="error">{loginError}</h4>}
                 <div>
                     <button type="submit">Login</button>
