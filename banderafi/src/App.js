@@ -12,7 +12,7 @@ import SignOutButton from './SignOut';
 import {AuthContext} from './Auth';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem('currentUser'));
  
   return (
     <AuthContext.Provider value={[user, setUser]}> 
