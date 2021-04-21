@@ -83,6 +83,7 @@ function Game() {
     {
         if (answered === true)
             getFlags();
+        document.getElementById(correctAnswer).style.background = '#FFFFFF';
     }
     return (
         <div className='game_area'>
