@@ -32,7 +32,7 @@ function CreateAccount() {
             password: password
         };
 
-        let userSignin = {}
+        let userSignin = {};
 
         try {
             userSignin = await axios.post('http://localhost:5000/create-account', newUser);
@@ -58,30 +58,24 @@ function CreateAccount() {
         <div className="create-account-page">
             <h1>Create Account</h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    <p>First Name</p>
-                    <input id="firstName" type="text" placeholder="First Name"/>
-                </label>
-                <label>
-                    <p>Last Name</p>
-                    <input id="lastName" type="text" placeholder="Last Name"/>
-                </label>
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text"/>
                 
                 <label for="lastName">Last Name</label>
                 <input id="lastName" type="text" />
                 
                 
                 <label for="username">Username</label>
-                <input class="username" name="username" type="text"/>
+                <input id="username" name="username" type="text"/>
                 
                 <label for="password">Password</label>
-                <input class="password" name="password" type="password" />
+                <input id="password" name="password" type="password" />
                 
                 <label for="confirmPassword">Re-Enter Password</label>
                 <input id="confirmPassword" name="confirmPassword" type="password"/>
                 
                 <div>
-                    <button type="submit">Login</button>
+                    <button type="submit">Create Account</button>
                 </div>
                 {error && <h4 className="error">{error}</h4>}
             </form>

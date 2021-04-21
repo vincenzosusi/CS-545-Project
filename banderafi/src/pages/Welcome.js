@@ -5,9 +5,12 @@ function Welcome(){
     return(
         <>
             <h1>Welcome to Banderafi!</h1>
-            <a href='./create-account'>Create Account</a>
-            <a href='./login'>Log In</a>
-            <a href='./play'>Play as a guest</a>
+            <ul id="welcome">
+            <li><a href='./create-account'>Create Account</a></li>
+            <li><a href='./login'>Log In</a></li>
+            <li><a href='./play'>Play as a guest</a></li>
+            </ul>
+            
         </>
 
     );

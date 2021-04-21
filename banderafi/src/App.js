@@ -16,12 +16,8 @@ function App() {
 
   return (
     <AuthContext.Provider value={[user, setUser]}> 
-      {user ? <h1>{user.data.username}</h1> : ''} 
       <Router>
-      <Nav></Nav>
-        <Link exact to="/create-account">Create Account</Link>
-        <Link exact to="/login">Login</Link>
-        <SignOutButton />
+      <Nav loggedIn={user}></Nav>
 
         <Switch>
           <Route path='/' exact component={Welcome} />

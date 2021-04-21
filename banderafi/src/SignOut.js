@@ -9,7 +9,7 @@ const SignOutButton = () => {
     // }
 
     return (
-        <button type='button' onClick={() => setUser(null)}>
+        <button id="signout" type='button' onClick={() => setUser(null)}>
             Sign Out
         </button>
     );

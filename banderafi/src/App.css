@@ -75,6 +75,17 @@ a{
   color:lightskyblue;
 }
 
+#signout {
+  border: none;
+  background-color:rgb(88, 88, 88);
+  color: lightskyblue;
+  cursor: pointer;
+  font-size: 16px;
+  height: 16px;
+  padding: 0px 6px;
+  text-decoration: underline lightskyblue;
+}
+
 #usertext{
   text-align: left;
 }
@@ -96,6 +107,15 @@ li {
   display: block;
   padding: 14px 16px;
   float: left;
+}
+
+ul#welcome {
+  background-color: #282c34;
+  display:block;
+}
+
+#welcome li{
+  float: none;
 }
 
 input[type=text], input[type=password] {
