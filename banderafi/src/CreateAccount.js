@@ -2,14 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import './App.css';
 import { AuthContext } from './Auth';
-import Users from './data/users.json';
+import axios from 'axios';
 
 function CreateAccount() {
-    const {user} = useContext(AuthContext);
+    const [user, setUser] = useContext(AuthContext);
     const [error, setError] = useState('');
     
-    const createNewUser = (e) => {
-        e.preventDefault();
+    async function createNewUser () {
         const firstName = document.getElementById('firstName').value;
         const lastName = document.getElementById('lastName').value;
         const username = document.getElementById('username').value;
@@ -26,29 +25,30 @@ function CreateAccount() {
             return false;
         }
         
-        for (let existingUser of Users) {
-            alert(`${Users.length}`);
-            //alert(`${existingUser.username}`);
-            if (existingUser.username === username) {
-                setError('Username already exists');
-                return false;
-            }
-        }
+        const newUser = {
+            firstName: firstName,
+            lastName: lastName,
+            username: username,
+            password: password
+        };
 
-        const newUsers = Users;
-        newUsers.push({
-            "username": username,
-            "firstName": firstName,
-            "lastName": lastName,
-            "password": password});
-        /*
-        alert(`Existing Users: ${newUsers.map(user => (
-            <p>{user.username}</p>
-        ))}`);*/
+        let userSignin = {}
 
-        alert({newUsers});
-        // check if user exists. if not add them and log them in
-    };
+        try {
+            userSignin = await axios.post('http://localhost:5000/create-account', newUser);
+        } catch (e) {
+            //console.log(e);
+            setError('Username Already Exists');
+            return false;
+        }        
+        setError('');
+        setUser(userSignin);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createNewUser();
+    }
 
     if (user) {
         return <Redirect to="/play" />;
@@ -57,9 +57,15 @@ function CreateAccount() {
     return (
         <div className="create-account-page">
             <h1>Create Account</h1>
-            <form onSubmit={createNewUser}>
-                <label for="firstName">First Name</label>
-                <input id="firstName" type="text"/>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    <p>First Name</p>
+                    <input id="firstName" type="text" placeholder="First Name"/>
+                </label>
+                <label>
+                    <p>Last Name</p>
+                    <input id="lastName" type="text" placeholder="Last Name"/>
+                </label>
                 
                 <label for="lastName">Last Name</label>
                 <input id="lastName" type="text" />
