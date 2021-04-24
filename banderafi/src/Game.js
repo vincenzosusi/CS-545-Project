@@ -3,12 +3,16 @@ import './App.css';
 import CountryList from './Countries';
 import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
+import { AuthContext } from './Auth';
 
 let answered = false;
 function Game() {
     let data = useLocation();
     let studyFlags = [];
-    const mode = data.state.mode;
+    let mode = 'freeplay';
+    if (data.state !== undefined) { // Ensures state was passed in before accessing state
+        mode = data.state.mode;
+    }
     if (mode === 'study'){
         studyFlags = data.state.toStudy;
     }
@@ -20,6 +24,7 @@ function Game() {
     const [toStudy, setStudy] = useState(studyFlags);
     const [studyIndex, setStudyIndex] = useState(0);
     const [remainingStudy, setRemaining] = useState(toStudy.length);
+    const [user, setUser] = useState(AuthContext);
 
     useEffect(() => {
         getFlags();
@@ -60,7 +65,8 @@ function Game() {
                     }
                 }
             }
-            let image = "https://www.countryflags.io/"+curCountry.code+"/flat/64.png";
+            let code = (curCountry.code).toLowerCase();
+            let image = "https://flagcdn.com/256x192/"+code+".png";
             let answer = false;
             if (i === answerIndex)
             {
@@ -125,8 +131,8 @@ function Game() {
                 <div className='flags'>
                     {
                         flags.map((flag) => 
-                            <button key={flag.name} id={flag.name}>
-                                <img src={flag.image} alt="flag" onClick={() => checkAnswer(flag.name)}/>
+                            <button key={flag.name} id={flag.name} onClick={() => checkAnswer(flag.name)}>
+                                <img src={flag.image} alt={flag.code}/>
                             </button>)
                     }
                 </div>

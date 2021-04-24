@@ -47,6 +47,12 @@ body {
   text-align: center;
 }
 
+h1 {
+  text-align: inherit;
+  text-shadow: grey;
+  font-family: inherit;
+}
+
 button{
   font-family : inherit;
   font-size: 20px;
@@ -63,6 +69,65 @@ button{
 
 .question_area p{
   font-size: 25px;
+}
+
+a{
+  color:lightskyblue;
+}
+
+#signout {
+  border: none;
+  background-color:rgb(88, 88, 88);
+  color: lightskyblue;
+  cursor: pointer;
+  font-size: 16px;
+  height: 16px;
+  padding: 0px 6px;
+  text-decoration: underline lightskyblue;
+}
+
+#usertext{
+  text-align: left;
+}
+
+#gametext{
+  float: right;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow:hidden;
+  background-color: rgb(88, 88, 88);
+  display: block;
+}
+
+li {
+  display: block;
+  padding: 14px 16px;
+  float: left;
+}
+
+ul#welcome {
+  background-color: #282c34;
+  display:block;
+}
+
+#welcome li{
+  float: none;
+}
+
+input[type=text], input[type=password] {
+  background-image: linear-gradient(#282c34,gray);
+  border: none;
+  color: white;
+  border-bottom: 2px solid lightslategrey;
+  display:block;
+  align-content: center;
+  margin: 10px 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .divider{

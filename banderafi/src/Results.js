@@ -24,11 +24,11 @@ function Results() {
             mode = 'freeplay';
         }
 
-
         return (
             <div className="results_section">
-                <p> You answered {score} out of {numAnswered} correctly</p>
-                <p> {score} / {numAnswered} = {percent}%</p>
+                {data.state.mode !== 'study' && <p> You answered {score} out of {numAnswered} correctly</p>}
+                {data.state.mode !== 'study' && <p> {score} / {numAnswered} = {percent}%</p>}
+                {data.state.mode === 'study' && <p>Great Job! You learned {score} flags!</p>}
                 <Link to={{
                     pathname: "/play",
                     state: {
