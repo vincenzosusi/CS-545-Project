@@ -4,8 +4,10 @@ import CountryList from './Countries';
 import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
 import { AuthContext } from './Auth';
+import Confetti from 'react-dom-confetti';
 
 let answered = false;
+let correct = false;
 function Game() {
     let data = useLocation();
     let studyFlags = [];
@@ -26,13 +28,16 @@ function Game() {
     const [remainingStudy, setRemaining] = useState(toStudy.length);
     const [user, setUser] = useState(AuthContext);
     const [wrongFlags, setWrong] = useState([]);
+    const [answerMessage, setMessage] = useState("");
 
     useEffect(() => {
         getFlags();
     }, [])
     function getFlags()
     {
+        setMessage("");
         answered = false;
+        correct = false;
         let flagsList = [];
         let answerIndex = Math.floor(Math.random() * 4);
         let flagIndex;
@@ -94,6 +99,7 @@ function Game() {
 
             if(name !== correctAnswer)
             {
+                setMessage("Sorry, that is " + name + "'s Flag");
                 setLives(lives - 1);
                 setStudy(toStudy.concat(studyIndex));
                 let button = document.getElementById(name);
@@ -101,6 +107,8 @@ function Game() {
                 setWrong(wrongFlags.concat(button));
             }
             else {
+                setMessage("Correct!");
+                correct = true;
                 setScore(score+1);
                 setRemaining(remainingStudy - 1);
             }
@@ -127,10 +135,31 @@ function Game() {
                     </div>
         }
     }
+
+    const confettiConfig = {
+        angle: 90,
+        spread: 360,
+        startVelocity: 40,
+        elementCount: 70,
+        dragFriction: 0.12,
+        duration: 3000,
+        stagger: 3,
+        width: "10px",
+        height: "10px",
+        perspective: "500px",
+        colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+      };
+
     return (
         <div className='game_area'>
+            <div className='confetti'>
+                <Confetti active={correct} config={confettiConfig}/>
+            </div>
             <div className='question_area'>
                 <p>Which of the following is {correctAnswer}'s flag?</p>
+            </div>
+            <div className='answer_area'>
+                <p>{answerMessage}</p>
             </div>
             <div className='flags_display'>
                 <div className='flags'>
@@ -142,9 +171,9 @@ function Game() {
                     }
                 </div>
             </div>
-            <div class="divider"/>
+            <div className="divider"/>
             <Next gamemode={mode} />
-            <div class="divider"/>
+            <div className="divider"/>
             <div className='exit_button'>
                 <Link to={{
                     pathname: "/results",

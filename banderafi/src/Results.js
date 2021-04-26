@@ -1,6 +1,7 @@
 import './App.css';
 import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
+import CountryList from './Countries'
 
 function Results() {
     let data = useLocation();
@@ -19,6 +20,15 @@ function Results() {
 
         let mode = data.state.mode;
         let toStudy = data.state.toStudy;
+
+        let toStudyCountries = [];
+
+        for (let i = 0; i < toStudy.length; i++)
+        {
+            toStudyCountries[i] = CountryList[toStudy[i]].name;
+        }
+
+        console.log(toStudy);
     
         if (mode === 'study') {
             mode = 'freeplay';
@@ -28,7 +38,11 @@ function Results() {
             <div className="results_section">
                 {data.state.mode !== 'study' && <p> You answered {score} out of {numAnswered} correctly</p>}
                 {data.state.mode !== 'study' && <p> {score} / {numAnswered} = {percent}%</p>}
-                {data.state.mode === 'study' && <p>Great Job! You learned {score} flags!</p>}
+                {data.state.mode === 'study' && score > 0 && <p>Great Job! You learned {score} flags!</p>}
+                {data.state.mode === 'study' && score < 1 && <p>You did not learn any flags.</p>}
+                {toStudy.length > 0 && <p>You still need to learn: </p>}
+                {toStudy.length > 0 && toStudyCountries.map((country) =>
+                    <p key={country}>{country}</p>)}
                 <Link to={{
                     pathname: "/play",
                     state: {
