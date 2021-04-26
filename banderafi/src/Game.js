@@ -25,6 +25,7 @@ function Game() {
     const [studyIndex, setStudyIndex] = useState(0);
     const [remainingStudy, setRemaining] = useState(toStudy.length);
     const [user, setUser] = useState(AuthContext);
+    const [wrongFlags, setWrong] = useState([]);
 
     useEffect(() => {
         getFlags();
@@ -97,6 +98,7 @@ function Game() {
                 setStudy(toStudy.concat(studyIndex));
                 let button = document.getElementById(name);
                 button.style.background = '#FF0000'
+                setWrong(wrongFlags.concat(button));
             }
             else {
                 setScore(score+1);
@@ -109,6 +111,9 @@ function Game() {
         if (answered === true)
             getFlags();
         document.getElementById(correctAnswer).style.background = '#FFFFFF';
+        wrongFlags.forEach((flag) => {
+            flag.style.background = '#FFFFFF';
+        });
     }
     function Next(props) 
     {
