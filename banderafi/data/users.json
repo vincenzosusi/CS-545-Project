@@ -16,5 +16,11 @@
         "firstName": "matt",
         "lastName": "sirota",
         "password": "hello"
+    },
+    {
+        "username": "vincenzo",
+        "firstName": "vincenzo",
+        "lastName": "susi",
+        "password": "test"
     }
 ]

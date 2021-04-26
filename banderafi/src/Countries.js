@@ -137,7 +137,6 @@ const countryCodes = [
     {code: 'MC', name: 'Monaco'},
     {code: 'MD', name: 'Moldova'},
     {code: 'ME', name: 'Montenegro'},
-    {code: 'MF', name: 'Saint Martin'},
     {code: 'MG', name: 'Madagascar'},
     {code: 'MH', name: 'Marshall Islands'},
     {code: 'MK', name: 'North Macedonia'},
@@ -196,7 +195,6 @@ const countryCodes = [
     {code: 'SG', name: 'Singapore'},
     {code: 'SH', name: 'Saint Helena'},
     {code: 'SI', name: 'Slovenia'},
-    {code: 'SJ', name: 'Svalbard And Jan Mayen'},
     {code: 'SK', name: 'Slovakia'},
     {code: 'SL', name: 'Sierra Leone'},
     {code: 'SM', name: 'San Marino'},
@@ -244,7 +242,11 @@ const countryCodes = [
     {code: 'YT', name: 'Mayotte'},
     {code: 'ZA', name: 'South Africa'},
     {code: 'ZM', name: 'Zambia'},
-    {code: 'ZW', name: 'Zimbabwe'}
+    {code: 'ZW', name: 'Zimbabwe'},
+    {code: 'gb-eng', name: 'England'},
+    {code: 'gb-nir', name: 'Northern Ireland'},
+    {code: 'gb-sct', name: 'Scotland'},
+    {code: 'gb-wls', name: 'Wales'}
 ];
 
 
