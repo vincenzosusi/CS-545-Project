@@ -11,6 +11,7 @@ function Game() {
     const [score, setScore] = useState(0);
     const [numAnswered, setNumAnswered] = useState(0);
     const [user, setUser] = useState(AuthContext);
+    const [wrongFlags, setWrong] = useState([]);
 
     useEffect(() => {
         getFlags();
@@ -74,6 +75,7 @@ function Game() {
             {
                 let button = document.getElementById(name);
                 button.style.background = '#FF0000'
+                setWrong(wrongFlags.concat(button));
             }
             else
                 setScore(score+1);
@@ -83,7 +85,11 @@ function Game() {
     {
         if (answered === true)
             getFlags();
+        // Changes flag backgrounds back to white if they were changed
         document.getElementById(correctAnswer).style.background = '#FFFFFF';
+        wrongFlags.forEach((flag) => {
+            flag.style.background = '#FFFFFF';
+        });
     }
     return (
         <div className='game_area'>
