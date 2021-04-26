@@ -1,7 +1,8 @@
 import './App.css';
 import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
-import CountryList from './Countries'
+import CountryList from './Countries';
+import StateList from './States';
 
 function Results() {
     let data = useLocation();
@@ -21,14 +22,17 @@ function Results() {
         let mode = data.state.mode;
         let toStudy = data.state.toStudy;
 
-        let toStudyCountries = [];
+        let toStudyDatabase = [];
+        let toStudyFlags = [];
+        if (data.state.type === "country")
+            toStudyDatabase = CountryList;
+        else
+            toStudyDatabase = StateList;
 
         for (let i = 0; i < toStudy.length; i++)
         {
-            toStudyCountries[i] = CountryList[toStudy[i]].name;
+            toStudyFlags[i] = toStudyDatabase[toStudy[i]].name;
         }
-
-        console.log(toStudy);
     
         if (mode === 'study') {
             mode = 'freeplay';
@@ -41,12 +45,13 @@ function Results() {
                 {data.state.mode === 'study' && score > 0 && <p>Great Job! You learned {score} flags!</p>}
                 {data.state.mode === 'study' && score < 1 && <p>You did not learn any flags.</p>}
                 {toStudy.length > 0 && <p>You still need to learn: </p>}
-                {toStudy.length > 0 && toStudyCountries.map((country) =>
-                    <p key={country}>{country}</p>)}
+                {toStudy.length > 0 && toStudyFlags.map((flag) =>
+                    <p key={flag}>{flag}</p>)}
                 <Link to={{
                     pathname: "/play",
                     state: {
-                        mode: mode
+                        mode: mode,
+                        type: data.state.type
                     }
                 }}>
                     <button type="button" id="retry">Play Again</button>
@@ -56,7 +61,8 @@ function Results() {
                     pathname: "/play",
                     state: {
                         mode: 'study',
-                        toStudy: toStudy
+                        toStudy: toStudy,
+                        type: data.state.type
                     }
                 }}>
                     <button type="button" id="study">Study</button>

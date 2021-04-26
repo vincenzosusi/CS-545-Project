@@ -242,7 +242,11 @@ const countryCodes = [
     {code: 'YT', name: 'Mayotte'},
     {code: 'ZA', name: 'South Africa'},
     {code: 'ZM', name: 'Zambia'},
-    {code: 'ZW', name: 'Zimbabwe'}
+    {code: 'ZW', name: 'Zimbabwe'},
+    {code: 'gb-eng', name: 'England'},
+    {code: 'gb-nir', name: 'Northern Ireland'},
+    {code: 'gb-sct', name: 'Scotland'},
+    {code: 'gb-wls', name: 'Wales'}
 ];
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import CountryList from './Countries';
+import StateList from './States';
 import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
 import { AuthContext } from './Auth';
@@ -8,6 +9,10 @@ import Confetti from 'react-dom-confetti';
 
 let answered = false;
 let correct = false;
+let flagDatabase = [];
+//let flagsToPick = [];
+let type = "";
+let numFlags = 0;
 function Game() {
     let data = useLocation();
     let studyFlags = [];
@@ -18,9 +23,22 @@ function Game() {
     if (mode === 'study'){
         studyFlags = data.state.toStudy;
     }
+
+    type = data.state.type;
+    if (data.state.type === "country")
+    {
+        flagDatabase = CountryList;
+    }
+    else
+    {
+        flagDatabase = StateList;
+    }
+
+
     const [flags, setFlags] = useState([]);
     const [correctAnswer, setAnswer] = useState("");
     const [score, setScore] = useState(0);
+    const [currentFlag, setCurrentFlag] = useState(1);
     const [numAnswered, setNumAnswered] = useState(0);
     const [lives, setLives] = useState(3);
     const [toStudy, setStudy] = useState(studyFlags);
@@ -29,7 +47,9 @@ function Game() {
     const [user, setUser] = useState(AuthContext);
     const [wrongFlags, setWrong] = useState([]);
     const [answerMessage, setMessage] = useState("");
+    const [flagsToPick, setFlagsToPick] = useState(flagDatabase.slice());
 
+    numFlags = flagDatabase.length;
     useEffect(() => {
         getFlags();
     }, [])
@@ -52,11 +72,21 @@ function Game() {
                 if (mode === 'study' && i === answerIndex){
                     flagIndex = toStudy.shift();
                     setStudy(toStudy);
-                } else {
-                    flagIndex = Math.floor(Math.random() * CountryList.length);
+                    curCountry = flagDatabase[flagIndex];
+                    name = curCountry.name;
+                } 
+                else if (i === answerIndex)
+                {
+                    flagIndex = Math.floor(Math.random() * flagsToPick.length);
+                    curCountry = flagsToPick[flagIndex];
+                    name = curCountry.name;
                 }
-                curCountry = CountryList[flagIndex];
-                name = curCountry.name;
+                else
+                {
+                    flagIndex = Math.floor(Math.random() * flagDatabase.length);
+                    curCountry = flagDatabase[flagIndex];
+                    name = curCountry.name;
+                }
 
                 if (flagsList.length === 0)
                     checkedDuplicate = true;
@@ -78,6 +108,11 @@ function Game() {
             {
                 setStudyIndex(flagIndex);
 
+                if (mode !== 'study')
+                {
+                    let removeIndex = flagsToPick.indexOf(curCountry);
+                    flagsToPick.splice(removeIndex,1);
+                }
                 answer = true;
                 setAnswer(curCountry.name);
             }
@@ -117,18 +152,23 @@ function Game() {
     function newFlags()
     {
         if (answered === true)
+        {
             getFlags();
-        document.getElementById(correctAnswer).style.background = '#FFFFFF';
-        wrongFlags.forEach((flag) => {
-            flag.style.background = '#FFFFFF';
-        });
+            setCurrentFlag(currentFlag+1);
+            document.getElementById(correctAnswer).style.background = '#FFFFFF';
+            wrongFlags.forEach((flag) => {
+                flag.style.background = '#FFFFFF';
+            });
+        }
     }
     function Next(props) 
     {
         if (props.gamemode === 'survival' && lives <= 0) {
-            return <p class="game_over">Game Over</p>;
+            return <p className="game_over">Game Over</p>;
         } else if (props.gamemode === 'study' && remainingStudy === 0) {
-            return <p class="game_over">Finished Studying</p>;
+            return <p className="game_over">Finished Studying</p>;
+        } else if (numAnswered === flagDatabase.length) {
+            return <p className="game_over">All Flags Complete</p>;
         } else {
             return <div className='next_button'>
                         <button type="button" id="next" onClick={newFlags}>Continue</button>
@@ -181,7 +221,8 @@ function Game() {
                         score: score,
                         numAnswered: numAnswered,
                         mode: mode,
-                        toStudy: toStudy
+                        toStudy: toStudy,
+                        type: type
                     }
                 }}>
                     <button type="button" id="exit">Exit</button>
@@ -189,6 +230,7 @@ function Game() {
             </div>
             <div className='score_area'>
                 <p>Score: {score}</p>
+                {mode!== 'study' && <p>Flag: {currentFlag}/{flagDatabase.length}</p>}
                 {mode === 'survival' && <p>Lives: {lives}</p>}
                 {mode === 'study' && <p>Flags Remaining: {remainingStudy}</p>}
             </div>
