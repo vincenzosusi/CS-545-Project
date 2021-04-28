@@ -225,7 +225,7 @@ function Game() {
                         type: type
                     }
                 }}>
-                    <button type="button" id="exit">Exit</button>
+                    <button type="button" id="exit">Exit & View Results</button>
                 </Link>
             </div>
             <div className='score_area'>
