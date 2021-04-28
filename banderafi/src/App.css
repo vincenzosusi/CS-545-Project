@@ -42,7 +42,7 @@
 body {
   background-color: #282c34;
   color: white;
-  padding: 40px;
+  padding: 0px;
   font-family: 'Anonymous Pro', monospace;  
   text-align: center;
 }
@@ -69,6 +69,8 @@ button{
 
 .question_area p{
   font-size: 25px;
+  padding: 10px;
+  margin: 10px 0px;
 }
 
 a{
@@ -86,15 +88,15 @@ a{
   text-decoration: underline lightskyblue;
 }
 
-#usertext{
-  text-align: left;
+.usertext{
+  display: inline-block;
 }
 
 #gametext{
   float: right;
 }
 
-ul{
+#navbar{
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -112,6 +114,7 @@ li {
 ul#welcome {
   background-color: #282c34;
   display:block;
+  padding: 0;
 }
 
 #welcome li{
@@ -144,4 +147,91 @@ input[type=text], input[type=password] {
 
 .answer_area{
   height: 25px;
+}
+
+#menuIcon {
+  display:none;
+}
+
+#responsiveNav {
+  display: none;
+}
+
+@media screen and (min-width: 626px) {
+  .mobileNavbarClosed, .mobileNavbarOpen, .mobileNavbarOpen li, .mobileNavbarClosed li{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  /** mobile device style changes */
+  body{
+    padding: 0px;
+    margin: 0;
+    padding: 0;
+  }
+  .flags button{
+    width: 40%;
+  }
+  .flags img{
+    width: 85%;
+  }
+  .question_area p {
+    font-size: 20px;
+  }
+
+  .answer_area p {
+    font-size: 14px;
+  }
+
+  #navbar{
+    display: none;
+  }
+
+  .mobileNavbarOpen {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    overflow:hidden;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(88, 88, 88);
+  }
+
+  .mobileNavbarOpen a {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    border-top: 2px black solid;
+  }
+
+  .mobileNavbarOpen a:hover {
+    background-color: rgb(122, 122, 122)
+  }
+
+  .mobileNavbarClosed {
+    height: 64px;
+    margin: 0;
+    background-color: rgb(88, 88, 88);
+  }
+  
+  .mobileNavbarClosed a {
+    display: none;
+  }
+
+  #menuIcon{
+    display: flex;
+    flex-grow: 1;
+    background-color: inherit;
+    max-height: 40px;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 2px;
+  }
+
+  #menuIcon:hover{
+    cursor: pointer;
+  }
+
 }
