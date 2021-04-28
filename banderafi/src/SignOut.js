@@ -12,6 +12,7 @@ const SignOutButton = () => {
     function onSignOut () {
         setUser(null);
         localStorage.clear();
+        window.location.href='/';
     }
 
     return (

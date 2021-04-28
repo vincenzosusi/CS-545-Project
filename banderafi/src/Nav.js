@@ -10,7 +10,7 @@ function Nav(props){
     console.log(user);
     let userText;
     let gameText;
-    if (!user.data){
+    if (!user || !user.data){
         //no logged in user
         userText = <li id="usertext">Welcome! <a href='./login'>Log In</a> or <a href='./create-account'>Create an Account</a></li>;
         gameText = <li id="gametext"><a href="/selection">Play as a Guest</a></li>

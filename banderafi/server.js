@@ -20,7 +20,17 @@ app.post('/create-account', async (req, res) => {
             username: req.body.username,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            password: req.body.password
+            password: req.body.password,
+            highScore: {
+                states: {
+                    survival: 0,
+                    freeplay: 0
+                },
+                country: {
+                    survival: 0,
+                    freeplay: 0
+                }
+            }
         };
 
         for (let existingUser of users) {
@@ -33,7 +43,9 @@ app.post('/create-account', async (req, res) => {
             "username": newUser.username,
             "firstName": newUser.firstName,
             "lastName": newUser.lastName,
-            "password": newUser.password});
+            "password": newUser.password,
+            "highScore": newUser.highScore
+        });
 
         const toWrite = JSON.stringify(users, null, 4);
         
@@ -99,7 +111,7 @@ app.post('/highscore', async (req, res) => {
             highScore: req.body.highScore
         };
 
-        const returnedUser = {};
+        let returnedUser = {};
 
         for (let savedUser of users) {
             if (savedUser.username === info.username) {
@@ -114,8 +126,10 @@ app.post('/highscore', async (req, res) => {
         
         await fs.writeFile('./data/users.json', toWrite);
             
-        res.status(200).json(returnedUser);
+        res.send(returnedUser);
+        console.log(returnedUser);
     } catch (e) {
         res.status(500).send('High Score Not Saved');
+        console.log("error");
     }
 });

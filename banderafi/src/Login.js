@@ -35,7 +35,7 @@ function Login() {
 
         setError('');
         setUser(userSignin);
-        localStorage.setItem('currentUser', userSignin);
+        localStorage.setItem('currentUser', JSON.stringify(userSignin));
     }
 
     const handleSubmit = (e) => {
@@ -43,7 +43,7 @@ function Login() {
         loginUser();
     }
 
-    if (user.data) {
+    if (user && user.data) {
         return <Redirect to="/selection" />;
     }
 
