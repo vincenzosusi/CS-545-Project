@@ -14,6 +14,7 @@ import {AuthContext} from './Auth';
 
 function App() {
   const [user, setUser] = useState(localStorage.getItem('currentUser'));
+  //console.log(JSON.parse(user));
  
   return (
     <AuthContext.Provider value={[user, setUser]}> 

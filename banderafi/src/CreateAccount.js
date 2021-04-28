@@ -43,7 +43,7 @@ function CreateAccount() {
         }        
         setError('');
         setUser(userSignin);
-        localStorage.setItem('currentUser', userSignin);
+        localStorage.setItem('currentUser', JSON.stringify(userSignin));
     }
 
     const handleSubmit = (e) => {
@@ -59,20 +59,20 @@ function CreateAccount() {
         <div className="create-account-page">
             <h1>Create Account</h1>
             <form onSubmit={handleSubmit}>
-                <label for="firstName">First Name</label>
+                <label htmlFor="firstName">First Name</label>
                 <input id="firstName" type="text"/>
                 
-                <label for="lastName">Last Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <input id="lastName" type="text" />
                 
                 
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input id="username" name="username" type="text"/>
                 
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input id="password" name="password" type="password" />
                 
-                <label for="confirmPassword">Re-Enter Password</label>
+                <label htmlFor="confirmPassword">Re-Enter Password</label>
                 <input id="confirmPassword" name="confirmPassword" type="password"/>
                 
                 <div>
