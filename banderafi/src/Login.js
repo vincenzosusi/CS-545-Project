@@ -43,7 +43,7 @@ function Login() {
         loginUser();
     }
 
-    if (user) {
+    if (user.data) {
         return <Redirect to="/selection" />;
     }
 
