@@ -42,7 +42,7 @@
 body {
   background-color: #282c34;
   color: white;
-  padding: 0px;
+  padding: 40px;
   font-family: 'Anonymous Pro', monospace;  
   text-align: center;
 }
@@ -73,6 +73,10 @@ button{
   margin: 10px 0px;
 }
 
+.score_area {
+  font-weight: bolder;
+}
+
 a{
   color:lightskyblue;
 }
@@ -88,14 +92,6 @@ a{
   text-decoration: underline lightskyblue;
 }
 
-.usertext{
-  display: inline-block;
-}
-
-#gametext{
-  float: right;
-}
-
 #navbar{
   list-style-type: none;
   margin: 0;
@@ -108,7 +104,22 @@ a{
 li {
   display: block;
   padding: 14px 16px;
-  float: left;
+  
+}
+
+#navbar li {
+  display: inline-block;
+  width: 24%;
+  margin: auto;
+  padding: 16px 1px;
+}
+
+.usertext{
+  display: inline-block;
+}
+
+#gametext{
+  float: right;
 }
 
 ul#welcome {
@@ -170,11 +181,22 @@ input[type=text], input[type=password] {
     margin: 0;
     padding: 0;
   }
+
+  .flags_display {
+    column-count: 2;
+    justify-items:center;
+    width: 75%;
+    margin: auto;
+    text-align: center;
+  }
+
   .flags button{
-    width: 40%;
+    width: 100%;
+    max-width: 250px;
   }
   .flags img{
     width: 85%;
+    max-width: 125px;
   }
   .question_area p {
     font-size: 20px;
@@ -205,8 +227,19 @@ input[type=text], input[type=password] {
     border-top: 2px black solid;
   }
 
+  .mobileNavbarOpen #signout {
+    padding: 22px;
+    height: unset;
+    text-align: center;
+    border-top: 2px black solid;
+  }
+
   .mobileNavbarOpen a:hover {
-    background-color: rgb(122, 122, 122)
+    background-color: rgb(122, 122, 122);
+  }
+
+  .mobileNavbarOpen #signout:hover {
+    background-color: rgb(122, 122, 122);
   }
 
   .mobileNavbarClosed {
@@ -214,8 +247,13 @@ input[type=text], input[type=password] {
     margin: 0;
     background-color: rgb(88, 88, 88);
   }
+
   
   .mobileNavbarClosed a {
+    display: none;
+  }
+
+  .mobileNavbarClosed #signout {
     display: none;
   }
 

@@ -7,7 +7,6 @@ import menuicon from './menuicon.png';
 function Nav(props){
     const [user, setUser] = useContext(AuthContext);
     const [open, setOpen] = useState(false);
-    let {firstName, ...rest} = user;
     let userText;
     let gameText;
     let modifiedNav;
@@ -16,11 +15,13 @@ function Nav(props){
         userText =<li id="usertext">Welcome! <a href='./login'>Log In</a> or <a href='./create-account'>Create an Account</a></li>;
         gameText = <li id="gametext"><a href="/selection">Play as a Guest</a></li>;
         modifiedNav = <>
-                <li><a href='/'>Home</a></li>
-                <li><a href='./login'>Login</a></li>
-                <li><a href='./create-account'>Create Account</a></li>
-                <li><a href='/selection'>Play as a Guest</a></li></>
+                <a href='/'>Home</a>
+                <a href='./login'>Login</a>
+                <a href='./create-account'>Create Account</a>
+                <a href='/selection'>Play as a Guest</a></>
     } else { //can we bring the data forward in a better way?
+        let {firstName, ...rest} = user;
+
         userText = <>
         <li className="usertext">Welcome back, {firstName}! </li>
         <li className="usertext"><SignOutButton /></li>
@@ -28,10 +29,9 @@ function Nav(props){
         </>;
         gameText = <li id="gametext"><a href="/selection">Play</a> and beat your high score!</li>;
         modifiedNav = <>
-        <li><a href='/'>Home</a></li>
-        <li><SignOutButton/></li>
-        <li><a href='./create-account'>Create Account</a></li>
-        <li><a href='/selection'>Play as a Guest</a></li>
+        <a href='/'>Home</a>
+        <SignOutButton/>
+        <a href='/results'>View High Scores</a>
     </>;
     }
 
@@ -43,10 +43,7 @@ function Nav(props){
             </ul>
             <div className={open ? "mobileNavbarOpen" : "mobileNavbarClosed"} >
             <img id='menuIcon' src={menuicon} alt='Menu' onClick={()=>setOpen(!open)}></img>
-                <a href='/'>Home</a>
-                <a href='./login'>Login</a>
-                <a href='./create-account'>Create Account</a>
-                <a href='/selection'>Play as a Guest</a>
+                {modifiedNav}
             </div>
         </>
     );
