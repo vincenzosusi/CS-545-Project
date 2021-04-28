@@ -70,3 +70,21 @@ app.post('/login', async (req, res) => {
         res.status(400).send('Username Or Password Incorrect');
     }
 });
+
+app.post('/highscore', async (req, res) => {
+    try {
+        const users = JSON.parse(await fs.readFile('./data/users.json'));
+        const info = {
+            username: req.body.username,
+            gameMode: req.body.gameMode,
+            highScore: req.body.highScore
+        };
+
+        for (let savedUser of users) {
+            if (savedUser.username === info.username) {
+                // if game mode high score exists, compare it to score given
+
+            }
+        }
+    }
+})
