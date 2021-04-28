@@ -12,13 +12,13 @@ function Nav(props){
     if (!user){
         //no logged in user
         userText = <li id="usertext">Welcome! <a href='./login'>Log In</a> or <a href='./create-account'>Create an Account</a></li>;
-        gameText = <li id="gametext"><a href="/play">Play as a Guest</a></li>
+        gameText = <li id="gametext"><a href="/selection">Play as a Guest</a></li>
     } else { //can we bring the data forward in a better way?
         userText = <>
         <li id="usertext">Welcome back, {user.firstName}! <SignOutButton /></li>
         <li><a href="/results">See Previous Scores</a></li>
         </>
-        gameText = <li id="gametext"><a href="/play">Play</a> and beat your high score!</li>
+        gameText = <li id="gametext"><a href="/selection">Play</a> and beat your high score!</li>
     }
     return(
         <>

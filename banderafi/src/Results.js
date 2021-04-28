@@ -1,9 +1,12 @@
 import './App.css';
 import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
+import CountryList from './Countries';
+import StateList from './States';
 
 function Results() {
     let data = useLocation();
+
     if (data.state !== undefined)
     {
         let score = data.state.score;
@@ -16,14 +19,58 @@ function Results() {
             percent = Math.round(percent);
         }
 
+        let mode = data.state.mode;
+        let toStudy = data.state.toStudy;
+
+        let toStudyDatabase = [];
+        let toStudyFlags = [];
+        if (data.state.type === "country")
+            toStudyDatabase = CountryList;
+        else
+            toStudyDatabase = StateList;
+
+        for (let i = 0; i < toStudy.length; i++)
+        {
+            toStudyFlags[i] = toStudyDatabase[toStudy[i]].name;
+        }
+    
+        if (mode === 'study') {
+            mode = 'freeplay';
+        }
+
         return (
             <div className="results_section">
-                <p> You answered {score} out of {numAnswered} correctly</p>
-                <p> {score} / {numAnswered} = {percent}%</p>
+                {data.state.mode !== 'study' && <p> You answered {score} out of {numAnswered} correctly</p>}
+                {data.state.mode !== 'study' && <p> {score} / {numAnswered} = {percent}%</p>}
+                {data.state.mode === 'study' && score > 0 && <p>Great Job! You learned {score} flags!</p>}
+                {data.state.mode === 'study' && score < 1 && <p>You did not learn any flags.</p>}
+                {toStudy.length > 0 && <p>You still need to learn: </p>}
+                {toStudy.length > 0 && toStudyFlags.map((flag) =>
+                    <p key={flag}>{flag}</p>)}
                 <Link to={{
-                    pathname: "/play"
+                    pathname: "/play",
+                    state: {
+                        mode: mode,
+                        type: data.state.type
+                    }
                 }}>
                     <button type="button" id="retry">Play Again</button>
+                </Link>
+                {toStudy.length !== 0 && 
+                <Link to={{
+                    pathname: "/play",
+                    state: {
+                        mode: 'study',
+                        toStudy: toStudy,
+                        type: data.state.type
+                    }
+                }}>
+                    <button type="button" id="study">Study</button>
+                </Link> }
+                <Link to={{
+                    pathname: "/selection",
+                }}>
+                    <button type="button" id="new_mode">Select new mode</button>
                 </Link>
             </div>
         )

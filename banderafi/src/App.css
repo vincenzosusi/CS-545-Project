@@ -135,3 +135,13 @@ input[type=text], input[type=password] {
   height:auto;
   display:inline-block;
 }
+
+.confetti{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer_area{
+  height: 25px;
+}

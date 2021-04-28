@@ -52,7 +52,7 @@ function CreateAccount() {
     }
 
     if (user) {
-        return <Redirect to="/play" />;
+        return <Redirect to="/selection" />;
     }
 
     return (

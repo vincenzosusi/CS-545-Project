@@ -44,17 +44,17 @@ function Login() {
     }
 
     if (user) {
-        return <Redirect to="/play" />;
+        return <Redirect to="/selection" />;
     }
 
     return (
         <div className="login-page">
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input id="username" type="text" />
                 
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input id="password" type="password"/>
                 
                 {error && <h4 className="error">{error}</h4>}

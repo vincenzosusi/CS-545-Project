@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Login from './pages/Login';
 import Game from './pages/Game';
 import Results from './pages/Results';
+import Mode from './pages/Mode';
 import CreateAccount from './pages/CreateAccount';
 import Welcome from './pages/Welcome';
 import Nav from './Nav';
@@ -25,6 +26,7 @@ function App() {
           <Route path='/create-account' exact component={CreateAccount} />
           <Route path='/play' exact component={Game} />
           <Route path='/results' exact component={Results} />
+          <Route path='/selection' exact component={Mode} />
         </Switch>
       </Router>
     </AuthContext.Provider>
