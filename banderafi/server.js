@@ -71,11 +71,30 @@ app.post('/login', async (req, res) => {
     }
 });
 
+/*
+{
+    username:
+    pass:
+    highScore: 
+        states:{
+            freeplay:
+            survival:
+            timed:
+        }
+        countries: {
+            freeplay:
+            survival:
+            timed:
+        }
+}
+*/
+
 app.post('/highscore', async (req, res) => {
     try {
         const users = JSON.parse(await fs.readFile('./data/users.json'));
         const info = {
             username: req.body.username,
+            gameTopic: req.body.gameTopic,
             gameMode: req.body.gameMode,
             highScore: req.body.highScore
         };
@@ -83,8 +102,16 @@ app.post('/highscore', async (req, res) => {
         for (let savedUser of users) {
             if (savedUser.username === info.username) {
                 // if game mode high score exists, compare it to score given
-
+                savedUser.highScore[info.gameTopic][info.gameMode] = info.highScore;
+                break;
             }
         }
+        const toWrite = JSON.stringify(users, null, 4);
+        
+        await fs.writeFile('./data/users.json', toWrite);
+            
+        res.status(200).json(newUser);
+    } catch (e) {
+        res.status(500).send('High Score Not Saved');
     }
-})
+});

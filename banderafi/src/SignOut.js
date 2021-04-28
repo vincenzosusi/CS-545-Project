@@ -15,9 +15,11 @@ const SignOutButton = () => {
     }
 
     return (
-        <button id="signout" type='button' onClick={() => {setUser(null); localStorage.clear(); window.location.href='/'}}>
-            Sign Out
-        </button>
+        <div>
+            <button id="signout" type='button' onClick={onSignOut}>
+                Sign Out
+            </button>
+        </div> 
     );
 };
 
