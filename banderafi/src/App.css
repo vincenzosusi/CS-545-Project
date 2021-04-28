@@ -38,6 +38,88 @@
     transform: rotate(360deg);
   }
 }
+.container{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Homepage Styling for Typing Animation */
+@media screen and (min-width: 626px) {
+  .typewriter h1{
+    line-height: 2em;
+    font-size: 70px;
+    font-weight: bolder;
+    overflow: hidden;
+    width: auto;
+    display: inline-block;
+    border-right: .15em solid white;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: typing 3.5s steps(40, end),
+         blink-caret .75s step-end infinite;
+  }
+  @keyframes typing{
+    from {max-width: 0}
+    to {max-width: 100%}
+  }
+  
+  @keyframes blink-caret{
+    from, to {border-color: transparent}
+    50% {border-color: lightskyblue}
+  }
+  .flagshome{
+    line-height: 1em;
+    font-size: 30px;
+  }
+
+}
+
+/* Game Mode Display Styling*/
+.mode_section p{
+  font-size: 32px;
+}
+
+.mode_section p2{
+  font-size: 20px;
+  font-style: italic;
+  font-weight: bold;
+}
+.row {
+  display: flex;
+  line-height: 0.5em;
+    font-size: 30px;
+}
+
+.column {
+  flex: 50%;
+  line-height: 1em;
+  font-size: 30px;
+}
+
+/* Clear floats after the columns */
+.mode_section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row button {
+  border-color: #3498db;
+  color:black;
+  box-shadow: 0 0 40px 40px lightskyblue inset, 0 0 0 0 lightskyblue;
+  -webkit-transition: all 120ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.row button:hover {
+  box-shadow: 0 0 10px 0 lightslategrey inset, 0 0 10px 4px lightslategrey;
+}
+.buttondivider{
+  width:50px;
+  height:20px;
+}
 
 body {
   background-color: #282c34;
@@ -129,6 +211,7 @@ input[type=text], input[type=password] {
   margin-left: auto;
   margin-right: auto;
 }
+
 
 .divider{
   width:5px;
