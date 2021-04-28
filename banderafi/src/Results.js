@@ -81,7 +81,7 @@ function Results() {
             <div className="results_section">
                 <p> No score available. Play the game to earn a score.</p>
                 <Link to={{
-                    pathname: "/play"
+                    pathname: "/selection"
                 }}>
                     <button type="button" id="retry">Play</button>
                 </Link>
