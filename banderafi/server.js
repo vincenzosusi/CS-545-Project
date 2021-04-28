@@ -99,18 +99,22 @@ app.post('/highscore', async (req, res) => {
             highScore: req.body.highScore
         };
 
+        const returnedUser = {};
+
         for (let savedUser of users) {
             if (savedUser.username === info.username) {
                 // if game mode high score exists, compare it to score given
+                returnedUser = savedUser;
                 savedUser.highScore[info.gameTopic][info.gameMode] = info.highScore;
                 break;
             }
         }
+
         const toWrite = JSON.stringify(users, null, 4);
         
         await fs.writeFile('./data/users.json', toWrite);
             
-        res.status(200).json(newUser);
+        res.status(200).json(returnedUser);
     } catch (e) {
         res.status(500).send('High Score Not Saved');
     }
