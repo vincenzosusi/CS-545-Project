@@ -104,8 +104,8 @@ app.post('/highscore', async (req, res) => {
         for (let savedUser of users) {
             if (savedUser.username === info.username) {
                 // if game mode high score exists, compare it to score given
-                returnedUser = savedUser;
                 savedUser.highScore[info.gameTopic][info.gameMode] = info.highScore;
+                returnedUser = savedUser;
                 break;
             }
         }
