@@ -10,7 +10,7 @@
                 "freeplay": 1
             },
             "country": {
-                "survival": 1,
+                "survival": 3,
                 "freeplay": 6
             }
         }
@@ -28,6 +28,22 @@
             "country": {
                 "survival": 0,
                 "freeplay": 2
+            }
+        }
+    },
+    {
+        "username": "fartballs",
+        "firstName": "fart",
+        "lastName": "balls",
+        "password": "fart",
+        "highScore": {
+            "states": {
+                "survival": 0,
+                "freeplay": 50
+            },
+            "country": {
+                "survival": 12,
+                "freeplay": 0
             }
         }
     }
