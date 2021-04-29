@@ -44,7 +44,7 @@ function Login() {
     }
 
     if (user && user.data) {
-        return <Redirect to="/selection" />;
+        window.location.href='/selection';
     }
 
     return (

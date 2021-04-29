@@ -1,17 +1,16 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import './App.css';
 import {AuthContext} from './Auth';
 import SignOutButton from './SignOut';
 import menuicon from './menuicon.png';
 
 function Nav(props){
-    const [user, setUser] = useContext(AuthContext);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('currentUser')));
     const [open, setOpen] = useState(false);
-    console.log(user);
     let userText;
     let gameText;
     let modifiedNav;
-    if (!user.data){
+    if (!user || !user.data){
         //no logged in user
         userText =<li id="usertext">Welcome! <a href='./login'>Log In</a> or <a href='./create-account'>Create an Account</a></li>;
         gameText = <li id="gametext"><a href="/selection">Play as a Guest</a></li>;
@@ -33,8 +32,11 @@ function Nav(props){
         <SignOutButton/>
         <a href='/results'>View High Scores</a>
     </>;
-
     }
+
+    useEffect(()=> {
+        
+    }, []);
 
     return(
         <>

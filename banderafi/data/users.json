@@ -14,5 +14,21 @@
                 "freeplay": 6
             }
         }
+    },
+    {
+        "username": "matt2",
+        "firstName": "matt2",
+        "lastName": "sirota2",
+        "password": "hi",
+        "highScore": {
+            "states": {
+                "survival": 0,
+                "freeplay": 0
+            },
+            "country": {
+                "survival": 0,
+                "freeplay": 2
+            }
+        }
     }
 ]
