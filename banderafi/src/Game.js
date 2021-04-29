@@ -111,7 +111,7 @@ function Game() {
             let answer = false;
             if (i === answerIndex)
             {
-                setStudyIndex(flagIndex);
+                setStudyIndex(flagDatabase.indexOf(curCountry));
 
                 if (mode !== 'study')
                 {

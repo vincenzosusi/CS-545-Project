@@ -46,5 +46,37 @@
                 "freeplay": 0
             }
         }
+    },
+    {
+        "username": "reesekh29",
+        "firstName": "reese",
+        "lastName": "hardy",
+        "password": "1234",
+        "highScore": {
+            "states": {
+                "survival": 24,
+                "freeplay": 37
+            },
+            "country": {
+                "survival": 7,
+                "freeplay": 22
+            }
+        }
+    },
+    {
+        "username": "astock",
+        "firstName": "Anne",
+        "lastName": "Stockless",
+        "password": "hi",
+        "highScore": {
+            "states": {
+                "survival": 9,
+                "freeplay": 19
+            },
+            "country": {
+                "survival": 2,
+                "freeplay": 18
+            }
+        }
     }
 ]

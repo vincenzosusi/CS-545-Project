@@ -52,7 +52,7 @@ function CreateAccount() {
     }
 
     if (user) {
-        return <Redirect to="/selection" />;
+        window.location.href='/selection';
     }
 
     return (

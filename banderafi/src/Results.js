@@ -36,7 +36,6 @@ function Results() {
 
         let mode = data.state.mode;
         let toStudy = data.state.toStudy;
-
         let toStudyDatabase = [];
         let toStudyFlags = [];
         if (data.state.type === "country")
