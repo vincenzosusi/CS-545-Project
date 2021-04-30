@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
 import CountryList from './Countries';
 import StateList from './States';
@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
 import { AuthContext } from './Auth';
 import Confetti from 'react-dom-confetti';
+import axios from 'axios';
 
 let answered = false;
 let correct = false;
 let flagDatabase = [];
-//let flagsToPick = [];
 let type = "";
 let numFlags = 0;
+let highScore = 0;
 function Game() {
     let data = useLocation();
     let studyFlags = [];
@@ -34,7 +35,6 @@ function Game() {
         flagDatabase = StateList;
     }
 
-
     const [flags, setFlags] = useState([]);
     const [correctAnswer, setAnswer] = useState("");
     const [score, setScore] = useState(0);
@@ -44,10 +44,15 @@ function Game() {
     const [toStudy, setStudy] = useState(studyFlags);
     const [studyIndex, setStudyIndex] = useState(0);
     const [remainingStudy, setRemaining] = useState(toStudy.length);
-    const [user, setUser] = useState(AuthContext);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('currentUser')));
     const [wrongFlags, setWrong] = useState([]);
     const [answerMessage, setMessage] = useState("");
     const [flagsToPick, setFlagsToPick] = useState(flagDatabase.slice());
+
+    if (user !== null)
+    {
+        highScore = user.data.highScore[type][mode];
+    }
 
     numFlags = flagDatabase.length;
     useEffect(() => {
@@ -106,12 +111,13 @@ function Game() {
             let answer = false;
             if (i === answerIndex)
             {
-                setStudyIndex(flagIndex);
+                setStudyIndex(flagDatabase.indexOf(curCountry));
 
                 if (mode !== 'study')
                 {
                     let removeIndex = flagsToPick.indexOf(curCountry);
                     flagsToPick.splice(removeIndex,1);
+                    setFlagsToPick(flagsToPick);
                 }
                 answer = true;
                 setAnswer(curCountry.name);
@@ -145,6 +151,24 @@ function Game() {
                 setMessage("Correct!");
                 correct = true;
                 setScore(score+1);
+                if (mode !== 'study')
+                {
+                    if (score >= highScore && user!== null)
+                    {
+                        let userInfo = {
+                            username: user.data.username,
+                            gameTopic: type,
+                            gameMode: mode,
+                            highScore: highScore + 1
+                        }
+                        axios.post("http://localhost:5000/highscore", userInfo)
+                            .then(res => {
+                                setUser(res);
+                                localStorage.setItem('currentUser', JSON.stringify(res));
+                            }
+                        )
+                    }
+                }
                 setRemaining(remainingStudy - 1);
             }
         }
@@ -225,11 +249,12 @@ function Game() {
                         type: type
                     }
                 }}>
-                    <button type="button" id="exit">Exit</button>
+                    <button type="button" id="exit">Exit & View Results</button>
                 </Link>
             </div>
             <div className='score_area'>
                 <p>Score: {score}</p>
+                {user !== null && mode!=='study' && <p>High Score: {highScore}</p>}
                 {mode!== 'study' && <p>Flag: {currentFlag}/{flagDatabase.length}</p>}
                 {mode === 'survival' && <p>Lives: {lives}</p>}
                 {mode === 'study' && <p>Flags Remaining: {remainingStudy}</p>}

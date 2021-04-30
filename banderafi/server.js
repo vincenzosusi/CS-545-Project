@@ -20,7 +20,17 @@ app.post('/create-account', async (req, res) => {
             username: req.body.username,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            password: req.body.password
+            password: req.body.password,
+            highScore: {
+                states: {
+                    survival: 0,
+                    freeplay: 0
+                },
+                country: {
+                    survival: 0,
+                    freeplay: 0
+                }
+            }
         };
 
         for (let existingUser of users) {
@@ -33,7 +43,9 @@ app.post('/create-account', async (req, res) => {
             "username": newUser.username,
             "firstName": newUser.firstName,
             "lastName": newUser.lastName,
-            "password": newUser.password});
+            "password": newUser.password,
+            "highScore": newUser.highScore
+        });
 
         const toWrite = JSON.stringify(users, null, 4);
         
@@ -68,5 +80,58 @@ app.post('/login', async (req, res) => {
         throw 'Username Or Password Incorrect';
     } catch (e) {
         res.status(400).send('Username Or Password Incorrect');
+    }
+});
+
+/*
+{
+    username:
+    pass:
+    highScore: 
+        states:{
+            freeplay:
+            survival:
+            timed:
+        }
+        countries: {
+            freeplay:
+            survival:
+            timed:
+        }
+}
+*/
+
+app.post('/highscore', async (req, res) => {
+    try {
+        const users = JSON.parse(await fs.readFile('./data/users.json'));
+        const info = {
+            username: req.body.username,
+            gameTopic: req.body.gameTopic,
+            gameMode: req.body.gameMode,
+            highScore: req.body.highScore
+        };
+
+        let returnedUser = {};
+
+        for (let savedUser of users) {
+            if (savedUser.username === info.username) {
+                // if game mode high score exists, compare it to score given
+                if (!savedUser.highScore[info.gameTopic][info.gameMode] || savedUser.highScore[info.gameTopic][info.gameMode] < info.highScore) {
+                    savedUser.highScore[info.gameTopic][info.gameMode] = info.highScore;
+                    returnedUser = savedUser;
+                    break;
+                }
+            }
+        }
+
+        const toWrite = JSON.stringify(users, null, 4);
+        
+        await fs.writeFile('./data/users.json', toWrite);
+            
+        res.send(returnedUser);
+        console.log(returnedUser);
+    } catch (e) {
+        res.status(500).send('High Score Not Saved');
+        console.log("error");
     }
 });

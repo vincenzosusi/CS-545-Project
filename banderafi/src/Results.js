@@ -6,9 +6,24 @@ import StateList from './States';
 
 function Results() {
     let data = useLocation();
+    let user = JSON.parse(localStorage.getItem('currentUser'));
 
     if (data.state !== undefined)
     {
+
+        let highScores = [];
+        if (user !== null)
+        {
+            let scores = user.data.highScore;
+            highScores = [
+                "High Scores:",
+                "Countries - Freeplay: " + scores.country.freeplay,
+                "Countries - Survival: " + scores.country.survival,
+                "States - Freeplay: " + scores.states.freeplay,
+                "States - Survival: " + scores.states.survival
+            ]
+            
+        }
         let score = data.state.score;
         let numAnswered = data.state.numAnswered;
         let percent = 0;
@@ -21,7 +36,6 @@ function Results() {
 
         let mode = data.state.mode;
         let toStudy = data.state.toStudy;
-
         let toStudyDatabase = [];
         let toStudyFlags = [];
         if (data.state.type === "country")
@@ -74,6 +88,37 @@ function Results() {
                 }}>
                     <button type="button" id="new_mode" title="select freeplay or survival">Select new mode</button>
                 </Link>
+                <div className = 'high_scores'>
+                    {highScores.map((score) =>
+                        <p key={score}>{score}</p>)}
+                </div>
+
+            </div>
+        )
+    }
+    else if (user !== null)
+    {
+        let highScores = [];
+        let scores = user.data.highScore;
+        highScores = [
+            "High Scores:",
+            "Countries - Freeplay: " + scores.country.freeplay,
+            "Countries - Survival: " + scores.country.survival,
+            "States - Freeplay: " + scores.states.freeplay,
+            "States - Survival: " + scores.states.survival
+        ]
+        
+        return (
+            <div className="results_section">
+                <div className = 'high_scores'>
+                    {highScores.map((score) =>
+                        <p key={score}>{score}</p>)}
+                </div>
+                <Link to={{
+                    pathname: "/selection",
+                }}>
+                    <button type="button" id="new_mode">Play Now</button>
+                </Link>
             </div>
         )
     }
@@ -83,7 +128,7 @@ function Results() {
             <div className="results_section">
                 <p> No score available. Play the game to earn a score.</p>
                 <Link to={{
-                    pathname: "/play"
+                    pathname: "/selection"
                 }}>
                     <button type="button" id="retry">Play</button>
                 </Link>

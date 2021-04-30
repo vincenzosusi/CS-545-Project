@@ -1,26 +1,82 @@
 [
     {
-        "username": "corinne",
-        "firstName": "Corinne",
-        "lastName": "Wisniewski",
-        "password": "hey"
-    },
-    {
-        "username": "kyle",
-        "firstName": "kyle",
-        "lastName": "bernardes",
-        "password": "kyle"
-    },
-    {
         "username": "matt",
         "firstName": "matt",
         "lastName": "sirota",
-        "password": "hello"
+        "password": "hello",
+        "highScore": {
+            "states": {
+                "survival": 0,
+                "freeplay": 1
+            },
+            "country": {
+                "survival": 3,
+                "freeplay": 6
+            }
+        }
     },
     {
-        "username": "vincenzo",
-        "firstName": "vincenzo",
-        "lastName": "susi",
-        "password": "test"
+        "username": "matt2",
+        "firstName": "matt2",
+        "lastName": "sirota2",
+        "password": "hi",
+        "highScore": {
+            "states": {
+                "survival": 0,
+                "freeplay": 0
+            },
+            "country": {
+                "survival": 0,
+                "freeplay": 2
+            }
+        }
+    },
+    {
+        "username": "fartballs",
+        "firstName": "fart",
+        "lastName": "balls",
+        "password": "fart",
+        "highScore": {
+            "states": {
+                "survival": 0,
+                "freeplay": 50
+            },
+            "country": {
+                "survival": 12,
+                "freeplay": 0
+            }
+        }
+    },
+    {
+        "username": "reesekh29",
+        "firstName": "reese",
+        "lastName": "hardy",
+        "password": "1234",
+        "highScore": {
+            "states": {
+                "survival": 24,
+                "freeplay": 37
+            },
+            "country": {
+                "survival": 7,
+                "freeplay": 22
+            }
+        }
+    },
+    {
+        "username": "astock",
+        "firstName": "Anne",
+        "lastName": "Stockless",
+        "password": "hi",
+        "highScore": {
+            "states": {
+                "survival": 9,
+                "freeplay": 19
+            },
+            "country": {
+                "survival": 2,
+                "freeplay": 18
+            }
+        }
     }
 ]
