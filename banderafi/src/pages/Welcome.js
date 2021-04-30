@@ -6,6 +6,7 @@ import logo from '../banderafi.png'
 function Welcome(){
     return(
         <>
+            <spacer type="horizontal" size="150"></spacer>
             <div class="container"><div class="typewriter"><h1>Welcome to Banderafi!</h1></div></div>
             <div class="flagshome"><h1>🇯🇵 🇰🇷 🇩🇪 🇨🇳 🇺🇸 🇫🇷 🇪🇸 🇮🇹 🇷🇺 🇬🇧</h1>
             <p>🤔 log in or play as a guest to test out your flag knowledge! 🤔</p></div>

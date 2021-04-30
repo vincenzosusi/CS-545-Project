@@ -41,7 +41,7 @@ function Results() {
         return (
             <div className="results_section">
                 {data.state.mode !== 'study' && <p> You answered {score} out of {numAnswered} correctly</p>}
-                {data.state.mode !== 'study' && <p> {score} / {numAnswered} = {percent}%</p>}
+                {data.state.mode !== 'study' && <p> {percent}% accuracy</p>}
                 {data.state.mode === 'study' && score > 0 && <p>Great Job! You learned {score} flags!</p>}
                 {data.state.mode === 'study' && score < 1 && <p>You did not learn any flags.</p>}
                 {toStudy.length > 0 && <p>You still need to learn: </p>}
@@ -55,6 +55,7 @@ function Results() {
                     }
                 }}>
                     <button type="button" id="retry">Play Again</button>
+                    <div class="buttondivider"/>
                 </Link>
                 {toStudy.length !== 0 && 
                 <Link to={{
@@ -65,12 +66,13 @@ function Results() {
                         type: data.state.type
                     }
                 }}>
-                    <button type="button" id="study">Study</button>
+                    <button type="button" id="study" title="practice flags you got incorrect">Study</button>
+                    <div class="buttondivider"/>
                 </Link> }
                 <Link to={{
                     pathname: "/selection",
                 }}>
-                    <button type="button" id="new_mode">Select new mode</button>
+                    <button type="button" id="new_mode" title="select freeplay or survival">Select new mode</button>
                 </Link>
             </div>
         )

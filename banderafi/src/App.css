@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+@import url(https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap);
+
 
 .App {
   text-align: center;
@@ -16,18 +17,18 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #F3F3F3  ;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #932432  ;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #932432;
 }
 
 @keyframes App-logo-spin {
@@ -48,6 +49,7 @@
 /* Homepage Styling for Typing Animation */
 @media screen and (min-width: 626px) {
   .typewriter h1{
+    color: #932432;
     line-height: 2em;
     font-size: 70px;
     font-weight: bolder;
@@ -65,10 +67,10 @@
     from {max-width: 0}
     to {max-width: 100%}
   }
-  
+
   @keyframes blink-caret{
     from, to {border-color: transparent}
-    50% {border-color: lightskyblue}
+    50% {border-color: #932432    }
   }
   .flagshome{
     line-height: 1em;
@@ -86,6 +88,7 @@
   font-size: 20px;
   font-style: italic;
   font-weight: bold;
+  white-space: pre-line
 }
 .row {
   display: flex;
@@ -107,14 +110,15 @@
 }
 
 .row button {
-  border-color: #3498db;
-  color:black;
-  box-shadow: 0 0 40px 40px lightskyblue inset, 0 0 0 0 lightskyblue;
-  -webkit-transition: all 120ms ease-in-out;
-  transition: all 150ms ease-in-out;
+  border-color: #283747;
+  cursor: pointer;
+  pointer-events: auto;
+  color:#932432;
+  box-shadow: 0 0 40px 40px #F3F3F3 inset, 0 0 0 0 #F3F3F3;
 }
 .row button:hover {
-  box-shadow: 0 0 10px 0 lightslategrey inset, 0 0 10px 4px lightslategrey;
+  box-shadow: 0 0 10px 0 #DE354C inset, 0 0 10px 4px #DE354C;
+  
 }
 .buttondivider{
   width:50px;
@@ -122,10 +126,10 @@
 }
 
 body {
-  background-color: #282c34;
-  color: white;
+  background-color: #F3F3F3  ;
+  color: #3C1874;
   padding: 40px;
-  font-family: 'Anonymous Pro', monospace;  
+  font-family: 'Karla', sans-serif; 
   text-align: center;
 }
 
@@ -154,18 +158,26 @@ button{
 }
 
 a{
-  color:lightskyblue;
+  color: #932432;
+}
+
+.results_section{
+  font-size: 30px;
+}
+
+.results_section button{
+  font-size: 20px;
 }
 
 #signout {
   border: none;
-  background-color:rgb(88, 88, 88);
-  color: lightskyblue;
+  background-color: #F3F3F3  ;
+  color: l#F3F3F3;
   cursor: pointer;
   font-size: 16px;
   height: 16px;
   padding: 0px 6px;
-  text-decoration: underline lightskyblue;
+  text-decoration: underline #F3F3F3;
 }
 
 #usertext{
@@ -181,7 +193,6 @@ ul{
   margin: 0;
   padding: 0;
   overflow:hidden;
-  background-color: rgb(88, 88, 88);
   display: block;
 }
 
@@ -192,12 +203,13 @@ li {
 }
 
 ul#welcome {
-  background-color: #282c34;
+  background-color: #F3F3F3  ;
   display:block;
 }
 
 #welcome li{
   float: none;
+  display:inline-block;
 }
 
 input[type=text], input[type=password] {
