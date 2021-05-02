@@ -5,6 +5,7 @@ import StateList from './States';
 import { Link } from 'react-router-dom';
 import {useLocation} from "react-router-dom";
 import { AuthContext } from './Auth';
+import {useWindowSize} from 'react-use';
 import Confetti from 'react-dom-confetti';
 import axios from 'axios';
 
@@ -34,6 +35,8 @@ function Game() {
     {
         flagDatabase = StateList;
     }
+
+    const { width, height } = useWindowSize();
 
     const [flags, setFlags] = useState([]);
     const [correctAnswer, setAnswer] = useState("");
@@ -200,17 +203,35 @@ function Game() {
         }
     }
 
+
+    function confettiScale(width) {
+        const spreadMax = 140;
+        const spreadMin = 45;
+        const widthMax = 1280;
+        const widthMin = 340;
+        if (width > widthMax) {
+            return spreadMax;
+        }
+        if (width < widthMin) {
+            return spreadMin;
+        }
+        // Map width of the screen onto a range of 45-150 for the confetti spread
+        let spread = (width - widthMin) * (spreadMax - spreadMin) / (widthMax - widthMin) + spreadMin; 
+        return spread; 
+
+    }
+
     const confettiConfig = {
         angle: 90,
-        spread: 360,
-        startVelocity: 40,
+        spread: confettiScale(width),
+        startVelocity: 30,
         elementCount: 70,
         dragFriction: 0.12,
         duration: 3000,
         stagger: 3,
         width: "10px",
         height: "10px",
-        perspective: "500px",
+        perspective: "1000px",
         colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
       };
 
