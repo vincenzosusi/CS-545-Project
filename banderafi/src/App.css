@@ -47,11 +47,11 @@
 }
 
 /* Homepage Styling for Typing Animation */
-@media screen and (min-width: 626px) {
+@media screen and (min-width: 880px) {
   .typewriter h1{
     color: #932432;
     line-height: 2em;
-    font-size: 70px;
+    font-size: 62px;
     font-weight: bolder;
     overflow: hidden;
     width: auto;
@@ -183,8 +183,8 @@ a{
 
 #signout {
   border: none;
-  background-color: #F3F3F3  ;
-  color: l#F3F3F3;
+  background-color: #3C1874;
+  color: #F3F3F3;
   cursor: pointer;
   font-size: 16px;
   height: 16px;
@@ -196,21 +196,31 @@ a{
   list-style-type: none;
   margin: 0;
   padding: 0;
+  background-color: #3C1874;
   overflow:hidden;
   display: block;
+  color: #f3f3f3
+}
+
+#navbar a {
+  color: #f3f3f3;
 }
 
 li {
   display: block;
   padding: 14px 16px;
-  
 }
 
 #navbar li {
+  color: #F3F3F3;
   display: inline-block;
-  width: 24%;
+  width: 23%;
   margin: auto;
-  padding: 16px 1px;
+  padding: 16px 5px;
+}
+
+#usertext{
+  float: left;
 }
 
 .usertext{
@@ -233,7 +243,7 @@ ul#welcome {
 }
 
 input[type=text], input[type=password] {
-  background-image: linear-gradient(#282c34,gray);
+  background-image: linear-gradient(#a78080,#591C0B);
   border: none;
   color: white;
   border-bottom: 2px solid lightslategrey;
@@ -269,13 +279,13 @@ input[type=text], input[type=password] {
   display: none;
 }
 
-@media screen and (min-width: 626px) {
+@media screen and (min-width: 726px) {
   .mobileNavbarClosed, .mobileNavbarOpen, .mobileNavbarOpen li, .mobileNavbarClosed li{
     display: none;
   }
 }
 
-@media screen and (max-width: 625px) {
+@media screen and (max-width: 725px) {
   /** mobile device style changes */
   body{
     padding: 0px;
@@ -291,6 +301,9 @@ input[type=text], input[type=password] {
     text-align: center;
   }
 
+  .results_section {
+    font-size: 18px;
+  }
   .flags button{
     width: 100%;
     max-width: 250px;
@@ -318,7 +331,7 @@ input[type=text], input[type=password] {
     overflow:hidden;
     margin: 0;
     padding: 0;
-    background-color: rgb(88, 88, 88);
+    background-color: #932432;
   }
 
   .mobileNavbarOpen a {
@@ -326,27 +339,30 @@ input[type=text], input[type=password] {
     display: flex;
     flex-direction: column;
     border-top: 2px black solid;
+    color: white;
   }
 
   .mobileNavbarOpen #signout {
     padding: 22px;
     height: unset;
     text-align: center;
+    width: 100%;
+    background-color: #932432;
     border-top: 2px black solid;
   }
 
   .mobileNavbarOpen a:hover {
-    background-color: rgb(122, 122, 122);
+    background-color: #994f59;
   }
 
   .mobileNavbarOpen #signout:hover {
-    background-color: rgb(122, 122, 122);
+    background-color: #994f59;
   }
 
   .mobileNavbarClosed {
     height: 64px;
     margin: 0;
-    background-color: rgb(88, 88, 88);
+    background-color: #932432;
   }
 
   
